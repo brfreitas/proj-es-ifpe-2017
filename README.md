@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/brfreitas/proj-es-ifpe-2017.svg?branch=master)](https://travis-ci.org/brfreitas/proj-es-ifpe-2017)
+
 # proj-es-ifpe-2017
 Repositório de artefatos do projeto da disciplina de engenharia de software
 
