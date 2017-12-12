@@ -1,45 +1,37 @@
 #!/bin/bash
+echo "Starting deployment"
+echo "Target: gh-pages branch"
 
-set -e # exit with nonzero exit code if anything fails
-
-if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]; then
-
-echo "Starting to update gh-pages\n"
-
-#copy data we're interested in to other place
-cp -R dist $HOME/dist
-
+DIST_DIRECTORY="dist/"
+CURRENT_COMMIT=`git rev-parse HEAD`
 ORIGIN_URL=`git config --get remote.origin.url`
 ORIGIN_URL_WITH_CREDENTIALS=${ORIGIN_URL/\/\/github.com/\/\/$GITHUB_TOKEN@github.com}
 
-echo "******************"
-echo $ORIGIN_URL
-echo "******************"
-echo "******************"
-echo $ORIGIN_URL_WITH_CREDENTIALS
-echo "******************"
-#go to home and setup git
-cd $HOME
-git config --global user.email "$GH_USER_EMAIL"
-git config --global user.name "$GH_USER"
+GH_USER_NAME="lthr"
+GH_USER_EMAIL="mikelothar@gmail.com"
 
-#using token clone gh-pages branch
-git clone --quiet --branch=gh-pages ${ORIGIN_URL_WITH_CREDENTIALS} gh-pages > /dev/null
+cp .gitignore $DIST_DIRECTORY || exit 1
 
-#go into directory and copy data we're interested in to that directory
-cd gh-pages
-cp -Rf $HOME/dist/* .
+echo "Checking out gh-pages branch"
+git checkout -B gh-pages || exit 1
 
-echo "Allow files with underscore https://help.github.com/articles/files-that-start-with-an-underscore-are-missing/" > .nojekyll
-echo "[View live](https://${GH_USER}.github.io/${GH_REPO}/)" > README.md
+echo "Removing old static content"
+git rm -rf . || exit 1
 
-#add, commit and push files
-git add -f .
-git commit -m "Travis build $TRAVIS_BUILD_NUMBER"
-git push -fq origin gh-pages > /dev/null
+echo "Copying dist content to root"
+cp -r $DIST_DIRECTORY/* . || exit 1
+cp $DIST_DIRECTORY/.gitignore . || exit 1
 
-echo "Done updating gh-pages\n"
+echo "Pushing new content to $ORIGIN_URL"
+git config user.name "$GH_USER_NAME" || exit 1
+git config user.email "$GH_USER_EMAIL" || exit 1
 
-else
- echo "Skipped updating gh-pages, because build is not triggered from the master branch."
-fi;
+git add -A . || exit 1
+git commit --allow-empty -m "Regenerated static content for $CURRENT_COMMIT" || exit 1
+git push --force --quiet "$ORIGIN_URL_WITH_CREDENTIALS" gh-pages > /dev/null 2>&1
+
+echo "Cleaning up temp files"
+rm -Rf $DIST_DIRECTORY
+
+echo "Deployed successfully."
+exit 0
