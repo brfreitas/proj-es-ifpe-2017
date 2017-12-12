@@ -8,11 +8,17 @@ ORIGIN_URL_WITH_CREDENTIALS=${ORIGIN_URL/\/\/github.com/\/\/$GITHUB_TOKEN@github
 git clone -b gh-pages $ORIGIN_URL_WITH_CREDENTIALS gh-pages
 cd gh-pages
 rm -rf *
-cp ../dist/* .
+rm -rf .babelrc
+rm -rf .editorconfig
+rm -rf .eslintignore
+rm -rf .eslintrc.js
+rm -rf .gitignore
+rm -rf .postcssrc.js
+rm -rf .travis.yml
+cp -a ../dist/. .
 git add .
 git commit -m "Regenerated static content for $CURRENT_COMMIT"
 git push
-echo "#"
 echo "Deployed successfully."
 # copy dist content to gh-pages
 # commit & push
