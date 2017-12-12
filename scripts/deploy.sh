@@ -11,10 +11,10 @@ git clone -b gh-pages $ORIGIN_URL_WITH_CREDENTIALS gh-pages
 ls
 echo "#"
 cd gh-pages
-pwd
+ls
 echo "#"
 git remote show origin
-cat index
+cat index.html
 echo "#"
 # copy dist content to gh-pages
 # commit & push
