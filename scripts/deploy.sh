@@ -9,6 +9,15 @@ echo "Starting to update gh-pages\n"
 #copy data we're interested in to other place
 cp -R dist $HOME/dist
 
+ORIGIN_URL=`git config --get remote.origin.url`
+ORIGIN_URL_WITH_CREDENTIALS=${ORIGIN_URL/\/\/github.com/\/\/$GITHUB_TOKEN@github.com}
+
+echo "******************"
+echo $ORIGIN_URL
+echo "******************"
+echo "******************"
+echo $ORIGIN_URL_WITH_CREDENTIALS
+echo "******************"
 #go to home and setup git
 cd $HOME
 git config --global user.email "$GH_USER_EMAIL"
