@@ -23,7 +23,7 @@ describe('Todo.vue', () => {
     vm.newTodo = 'teste'
     vm.addTodo()
     expect(vm.todos.length)
-    .toEqual(3)
+    .toEqual(1)
   })
   it('Não deve inserir um item vazio na lista de todo', () => {
     const Constructor = Vue.extend(Todo)
