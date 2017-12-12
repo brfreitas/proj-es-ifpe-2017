@@ -2,17 +2,26 @@
 echo "Starting deployment"
 echo "Target: gh-pages branch"
 
-pwd
 ls
-
+echo "#"
+ORIGIN_URL=`git config --get remote.origin.url`
+ORIGIN_URL_WITH_CREDENTIALS=${ORIGIN_URL/\/\/github.com/\/\/$GITHUB_TOKEN@github.com}
 # checkout da branch gh-pages to directory gh-pages
+git clone -b gh-pages $ORIGIN_URL_WITH_CREDENTIALS gh-pages
+ls
+echo "#"
+cd gh-pages
+pwd
+echo "#"
+git remote show origin
+cat index
+echo "#"
 # copy dist content to gh-pages
 # commit & push
 
 #DIST_DIRECTORY="dist/"
 #CURRENT_COMMIT=`git rev-parse HEAD`
-#ORIGIN_URL=`git config --get remote.origin.url`
-#ORIGIN_URL_WITH_CREDENTIALS=${ORIGIN_URL/\/\/github.com/\/\/$GITHUB_TOKEN@github.com}
+#
 
 #cp .gitignore $DIST_DIRECTORY || exit 1
 
