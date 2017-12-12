@@ -24,7 +24,7 @@ git config --global user.email "$GH_USER_EMAIL"
 git config --global user.name "$GH_USER"
 
 #using token clone gh-pages branch
-git clone --quiet --branch=gh-pages https://${GITHUB_TOKEN}@github.com/${GH_USER}/${GH_REPO}.git gh-pages > /dev/null
+git clone --quiet --branch=gh-pages ${ORIGIN_URL_WITH_CREDENTIALS} gh-pages > /dev/null
 
 #go into directory and copy data we're interested in to that directory
 cd gh-pages
