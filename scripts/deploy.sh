@@ -1,6 +1,9 @@
 #!/bin/bash
 echo "Starting deployment"
 echo "Target: gh-pages branch"
+echo "--------------------"
+echo $GITHUB_TOKEN
+echo "--------------------"
 
 DIST_DIRECTORY="dist/"
 CURRENT_COMMIT=`git rev-parse HEAD`
