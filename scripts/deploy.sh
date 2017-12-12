@@ -1,9 +1,6 @@
 #!/bin/bash
 echo "Starting deployment"
 echo "Target: gh-pages branch"
-echo "--------------------"
-echo $GITHUB_TOKEN
-echo "--------------------"
 
 DIST_DIRECTORY="dist/"
 CURRENT_COMMIT=`git rev-parse HEAD`
@@ -17,6 +14,10 @@ git checkout -B gh-pages || exit 1
 
 echo "Removing old static content"
 git rm -rf . || exit 1
+
+echo "*********************"
+ls
+echo "*********************"
 
 echo "Copying dist content to root"
 cp -r $DIST_DIRECTORY/* . || exit 1
