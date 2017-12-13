@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/brfreitas/proj-es-ifpe-2017.svg?branch=master)](https://travis-ci.org/brfreitas/proj-es-ifpe-2017)
 [![Maintainability](https://api.codeclimate.com/v1/badges/05c215ba6802600a284d/maintainability)](https://codeclimate.com/github/brfreitas/proj-es-ifpe-2017/maintainability)
+[![codecov](https://codecov.io/gh/brfreitas/proj-es-ifpe-2017/branch/master/graph/badge.svg)](https://codecov.io/gh/brfreitas/proj-es-ifpe-2017)
 
 # proj-es-ifpe-2017
 Repositório de artefatos do projeto da disciplina de engenharia de software
