@@ -15,7 +15,7 @@ describe('Todo.vue', () => {
     const Constructor = Vue.extend(Todo)
     const vm = new Constructor().$mount()
     expect(vm.$el.querySelector('header.header h1').textContent)
-    .toEqual('todos')
+    .toEqual('TODO')
   })
   it('Deve inserir um item na lista de todo', () => {
     const Constructor = Vue.extend(Todo)
